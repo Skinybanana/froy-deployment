@@ -14,7 +14,13 @@ jobs:
           node-version: "16"
       - name: Install Dependencies
         run: npm install
+      - name: build
+        run: npm build
+      - name: deploy
+        run: npm deploy -p --auth {{secrets.NETLIFY_AUTH_TOKEN}} --site {{secrets.NETLIFY_SITE_ID}}
       - name: Test Lint
         run: npm run lint
       - name: Test coverage
         run: npm run test
+
+
