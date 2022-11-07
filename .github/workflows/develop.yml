@@ -8,8 +8,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-
-# Allow one concurrent deployment v
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -28,7 +26,7 @@ jobs:
         run: npm run lint
       - name: Test coverage
         run: npm run test
-  QA-Deploy:
+  Netlify-Deploy:
     needs: Validate-Changes
     environment:
       name: 'QA'
@@ -46,7 +44,7 @@ jobs:
         run: CI=false npm run build
       - name: deploy
         run: netlify deploy -p --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --site ${{secrets.NETLIFY_SITE_ID}}
-  PR-Management:
+  Pull-Request:
     needs: QA-deploy
     runs-on: ubuntu-latest
     permissions: write-all
