@@ -45,7 +45,7 @@ jobs:
       - name: deploy
         run: netlify deploy -p --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --site ${{secrets.NETLIFY_SITE_ID}}
   Pull-Request:
-    needs: QA-deploy
+    needs: Netlify-Deploy
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
