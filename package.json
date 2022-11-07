@@ -2,7 +2,7 @@
   "name": "froy-deployment",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Skinybanana.github.io/froy-deployment/",
+  "homepage": "https://froy-qa-env.netlify.app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -23,7 +23,8 @@
     "test": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --cache . --ext ts,tsx",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setHomepage": "node scripts/homepage.js"
   },
   "eslintConfig": {
     "extends": [
