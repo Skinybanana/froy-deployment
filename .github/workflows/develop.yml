@@ -4,8 +4,31 @@ on:
   push:
     branches:
       - develop/*
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  test-code:
+  Validate-Changes:
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install Dependencies
+        run: npm install
+      - name: Test Lint
+        run: npm run lint
+      - name: Test coverage
+        run: npm run test
+  QA-Deploy:
+    needs: Validate-Changes
     environment:
       name: 'QA'
     runs-on: ubuntu-latest
@@ -22,9 +45,6 @@ jobs:
         run: CI=false npm run build
       - name: deploy
         run: netlify deploy -p --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --site ${{secrets.NETLIFY_SITE_ID}}
-      - name: Test Lint
-        run: npm run lint
-      - name: Test coverage
-        run: npm run test
+      
 
 
