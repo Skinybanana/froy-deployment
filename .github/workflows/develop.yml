@@ -16,6 +16,8 @@ jobs:
           node-version: "16"
       - name: Install Dependencies
         run: npm install
+      - name: set Homepage
+        run: npm run setHomepage
       - name: build
         run: CI=false npm run build
       - name: deploy
